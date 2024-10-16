@@ -1,19 +1,27 @@
 import { Toaster } from "react-hot-toast";
 import Home from "./pages/Home";
-import { LoaderProvider } from "./context/LoaderContext";
-import { TodosProvider } from "./context/TodosContext";
-import { DarkModeProvider } from "./context/DarkModeContext";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    const changeFavicon = (iconUrl) => {
+      const link =
+        document.querySelector("link[rel*='icon']") ||
+        document.createElement("link");
+      link.rel = "icon";
+      link.href = iconUrl;
+      document.head.appendChild(link);
+      document.title = "Todo App";
+    };
+
+    changeFavicon("/favicon.png");
+  }, []);
+
   return (
-    <DarkModeProvider>
-      <TodosProvider>
-        <LoaderProvider>
-          <Toaster />
-          <Home />
-        </LoaderProvider>
-      </TodosProvider>
-    </DarkModeProvider>
+    <>
+      <Toaster />
+      <Home />
+    </>
   );
 }
 
