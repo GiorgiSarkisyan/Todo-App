@@ -1,10 +1,17 @@
 /* eslint-disable react/prop-types */
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
-const DarkModeContext = createContext(); // Declare the context
+const DarkModeContext = createContext();
 
 function DarkModeProvider({ children }) {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    const savedItem = localStorage.getItem("darkMode");
+    return savedItem === "true";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("darkMode", darkMode);
+  }, [darkMode]);
 
   return (
     <DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
@@ -13,5 +20,4 @@ function DarkModeProvider({ children }) {
   );
 }
 
-// Export both the context and the provider
 export { DarkModeProvider, DarkModeContext };

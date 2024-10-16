@@ -4,6 +4,8 @@ import "./index.css";
 import App from "./App.jsx";
 import { DarkModeProvider } from "./context/DarkModeContext.jsx";
 
+document.title = "Todo App";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <DarkModeProvider>
