@@ -6,11 +6,14 @@ export async function addTodo(value, isActive, setState, setLoading) {
   setLoading(true);
 
   try {
-    const response = await fetch("http://localhost:5000/api/todos", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newTodo),
-    });
+    const response = await fetch(
+      "https://todo-app-nla7.onrender.com/api/todos",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newTodo),
+      }
+    );
 
     if (!response.ok) throw new Error("Failed to post the new todo");
 

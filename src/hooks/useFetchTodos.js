@@ -8,7 +8,9 @@ const useFetchTodos = (setTodos) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/todos");
+        const response = await fetch(
+          "https://todo-app-nla7.onrender.com/api/todos"
+        );
         const data = await response.json();
         setTodos(Array.isArray(data) ? data : []);
       } catch (error) {

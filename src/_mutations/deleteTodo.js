@@ -5,9 +5,12 @@ export const deleteTodo = async (id, setTodos, todos, setLoading) => {
   try {
     setLoading(true);
 
-    const response = await fetch(`http://localhost:5000/api/todos/${id}`, {
-      method: "DELETE",
-    });
+    const response = await fetch(
+      `https://todo-app-nla7.onrender.com/api/todos/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
 
     if (!response.ok) {
       throw new Error("Failed to delete todo");

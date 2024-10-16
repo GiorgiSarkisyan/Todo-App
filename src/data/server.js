@@ -1,10 +1,10 @@
-// server.js
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 
 const app = express();
-const PORT = 5000;
+
+// Hardcoded MongoDB URI - consider moving to environment variables in production
 const MONGODB_URI =
   "mongodb+srv://giorgi:giogio13S@cluster0.8si4fbh.mongodb.net/TodoApp?retryWrites=true&w=majority&appName=Cluster0";
 
@@ -18,7 +18,11 @@ mongoose
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://todo-app-amber-nu.vercel.app"],
+    origin: [
+      "http://localhost:5173",
+      "https://todo-app-amber-nu.vercel.app",
+      "https://todo-app-nla7.onrender.com",
+    ],
   })
 );
 
@@ -98,8 +102,4 @@ app.patch("/api/todos/:id", async (req, res) => {
     console.error("Error while updating todo:", err);
     res.status(500).json({ message: err.message });
   }
-});
-
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
 });

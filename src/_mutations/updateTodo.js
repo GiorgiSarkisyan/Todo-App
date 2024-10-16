@@ -2,7 +2,7 @@ import toast from "react-hot-toast";
 
 export async function updateTodo(id, active, setLoading, setTodos) {
   setLoading(true);
-  await fetch(`http://localhost:5000/api/todos/${id}`, {
+  await fetch(`https://todo-app-nla7.onrender.com/api/todos/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
