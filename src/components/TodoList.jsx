@@ -37,7 +37,7 @@ export default function TodoList() {
           fetchLoading={fetchLoading}
           loading={loading}
           filteredTodos={filteredTodos}
-          deleteTodo={(id) => deleteTodo(id)}
+          deleteTodo={(id) => deleteTodo(id, setTodos, todos, setLoading)}
           filter={filter}
         />
 

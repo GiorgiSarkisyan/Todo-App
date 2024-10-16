@@ -1,29 +1,26 @@
-import toast from "react-hot-toast";
+// _mutations/deleteTodo.js
+import { toast } from "react-hot-toast";
 
-export async function deleteTodo(_id, setState, data) {
+export const deleteTodo = async (id, setTodos, todos, setLoading) => {
   try {
-    if (!_id) {
-      console.error("Todo ID is missing.");
-      return;
-    }
+    setLoading(true);
 
-    const response = await fetch(`http://localhost:5000/api/todos/${_id}`, {
+    const response = await fetch(`http://localhost:5000/api/todos/${id}`, {
       method: "DELETE",
     });
 
     if (!response.ok) {
-      throw new Error("Failed to delete the todo");
+      throw new Error("Failed to delete todo");
     }
-    setState(data.filter((t) => t._id !== _id));
 
-    toast.success("Todo deleted successfully", {
-      style: {
-        width: "300px",
-        height: "60px",
-        fontSize: "20px",
-      },
-    });
+    const updatedTodos = todos.filter((todo) => todo._id !== id);
+    setTodos(updatedTodos);
+
+    toast.success("Todo deleted successfully!");
   } catch (error) {
-    console.error("Error while deleting todo:", error);
+    console.error("Error deleting todo:", error);
+    toast.error("Failed to delete todo");
+  } finally {
+    setLoading(false);
   }
-}
+};
