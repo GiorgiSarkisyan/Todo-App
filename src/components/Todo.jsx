@@ -16,7 +16,7 @@ export default function Todo({ todo, deleteTodo }) {
     <div
       className={`border-b  ${
         darkMode ? "border-b-[#393A4B]" : "border-b-[#E3E4F1]"
-      } p-3 h-[85px] flex items-center gap-6 transition-all duration-300`}
+      } p-3 h-[85px] flex items-center gap-6 transition-all duration-300 group`}
     >
       {active ? (
         <img
@@ -46,7 +46,7 @@ export default function Todo({ todo, deleteTodo }) {
       >
         {value}
       </span>
-      <span className="ml-auto">
+      <span className="ml-auto opacity-0  transition-opacity duration-300 group-hover:opacity-100">
         <HiX className="w-6 h-6" color="gray" onClick={deleteTodo} />
       </span>
     </div>
