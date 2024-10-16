@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 
-const DarkModeContext = createContext();
+const DarkModeContext = createContext(); // Declare the context
 
 function DarkModeProvider({ children }) {
   const [darkMode, setDarkMode] = useState(false);
@@ -13,12 +13,5 @@ function DarkModeProvider({ children }) {
   );
 }
 
-function useDarkMode() {
-  const context = useContext(DarkModeContext);
-  if (context === undefined)
-    throw new Error("DarkModeContext was used outside of DarkModeProvider");
-
-  return context;
-}
-
-export { DarkModeProvider, useDarkMode };
+// Export both the context and the provider
+export { DarkModeProvider, DarkModeContext };

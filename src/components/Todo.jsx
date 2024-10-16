@@ -1,36 +1,51 @@
 import { HiX } from "react-icons/hi";
+import { useContext } from "react";
+import { TodosContext } from "../context/TodosContext";
+import { LoaderContext } from "../context/LoaderContext";
+import { DarkModeContext } from "../context/DarkModeContext";
+import { handleCheckboxChange } from "../handlers/todoHandlers";
 
 /* eslint-disable react/prop-types */
-export default function Todo({ todo, todos, setTodos }) {
-  const { value, _id } = todo;
-
-  const deleteTodo = async () => {
-    try {
-      // Check if the todo has an _id before sending the request
-      if (!_id) {
-        console.error("Todo ID is missing.");
-        return;
-      }
-
-      const response = await fetch(`http://localhost:5000/api/todos/${_id}`, {
-        method: "DELETE",
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to delete the todo");
-      }
-
-      // Update the state to remove the deleted todo
-      setTodos(todos.filter((t) => t._id !== _id));
-    } catch (error) {
-      console.error("Error while deleting todo:", error);
-    }
-  };
+export default function Todo({ todo, deleteTodo }) {
+  const { value, active } = todo;
+  const { setTodos } = useContext(TodosContext);
+  const { setLoading } = useContext(LoaderContext);
+  const { darkMode } = useContext(DarkModeContext);
 
   return (
-    <div className=" border-b border-b-[#E3E4F1] p-3 h-[85px] flex items-center gap-6">
-      <input type="checkbox" className="w-7 h-7" />
-      <span className="font-josefin text-[25px] text-[#494C6B]">{value}</span>
+    <div
+      className={`border-b  ${
+        darkMode ? "border-b-[#393A4B]" : "border-b-[#E3E4F1]"
+      } p-3 h-[85px] flex items-center gap-6 transition-all duration-300`}
+    >
+      {active ? (
+        <img
+          src="/active.png"
+          alt="active"
+          width="36.5px"
+          height="18px"
+          onClick={() => handleCheckboxChange(todo, setLoading, setTodos)}
+          className="select-none"
+        />
+      ) : (
+        <div
+          className={`w-9 h-9 border-2 ${
+            darkMode ? "border-[#393A4B] bg-[#25273D] " : "border-[#E3E4F1]"
+          } rounded-full select-none transition-all duration-300`}
+          onClick={() => handleCheckboxChange(todo, setLoading, setTodos)}
+        ></div>
+      )}
+      <span
+        className={`font-josefin text-[25px] transition-all duration-300 ${
+          darkMode ? "text-[#C8CBE7]" : "text-[#494C6B]"
+        } ${
+          active
+            ? `line-through ${darkMode ? "text-[#4D5067]" : "text-[#7b7c81]"}`
+            : " "
+        }`}
+      >
+        {value}
+      </span>
       <span className="ml-auto">
         <HiX className="w-6 h-6" color="gray" onClick={deleteTodo} />
       </span>

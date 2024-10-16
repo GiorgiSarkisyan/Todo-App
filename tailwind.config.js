@@ -6,7 +6,8 @@ export default {
   theme: {
     extend: {
       boxShadow: {
-        custom: "0px 35px 50px -15px rgba(194, 195, 214, 0.5)",
+        "custom-light": "0 4px 20px rgba(0, 0, 0, 0.1)",
+        "custom-dark": "0 2px 10px rgba(0, 0, 0, 0.2)",
       },
       fontFamily: {
         josefin: ["Josefin Sans"],

@@ -1,45 +1,55 @@
-import { useEffect, useState } from "react";
-import Todo from "./Todo";
+import { useContext, useState } from "react";
 import Input from "./Input";
+import { LoaderContext } from "../context/LoaderContext";
+import { TodosContext } from "../context/TodosContext";
+import { DarkModeContext } from "../context/DarkModeContext";
+import { handleClearCompleted } from "../handlers/todoHandlers";
+import useFetchTodos from "../hooks/useFetchTodos";
+import TodoFooter from "./TodoFooter";
+import TodoListContent from "./TodoListContent";
+import { deleteTodo } from "../_mutations/deleteTodo";
 
 export default function TodoList() {
-  const [todos, setTodos] = useState([]);
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch("http://localhost:5000/api/todos");
-      const data = await response.json();
-      setTodos(data);
-    }
-    fetchData();
-  }, []);
+  const { todos, setTodos } = useContext(TodosContext);
+  const [filter, setFilter] = useState("all");
+  const { loading, setLoading } = useContext(LoaderContext);
+  const { darkMode } = useContext(DarkModeContext);
 
-  console.log(todos);
+  const { loading: fetchLoading } = useFetchTodos(setTodos);
+
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === "active") return todo.active;
+    if (filter === "completed") return !todo.active;
+    return true;
+  });
 
   return (
     <>
       <Input setTodos={setTodos} />
+      <div
+        className={`${
+          darkMode
+            ? "bg-[#25273D] shadow-custom-dark"
+            : "bg-white shadow-custom-light"
+        } flex flex-col w-full h-[540px] rounded-xl p-1 transition-all duration-300`}
+      >
+        <TodoListContent
+          fetchLoading={fetchLoading}
+          loading={loading}
+          filteredTodos={filteredTodos}
+          deleteTodo={(id) => deleteTodo(id)}
+          filter={filter}
+        />
 
-      <div className="flex flex-col w-full bg-white h-[540px] shadow-custom rounded-xl p-1">
-        <div className="overflow-y-auto h-[500px] scrollbar-track-black scrollbar-thin">
-          {todos.map((todo) => (
-            <Todo
-              todo={todo}
-              key={todo._id}
-              todos={todos}
-              setTodos={setTodos}
-            />
-          ))}
-        </div>
-
-        <div className="flex justify-between p-5 font-josefin h-15 mt-auto border-t border-t-[rgba(227, 228, 241, 1)]">
-          <span className="text-lg">{todos.length} items left</span>
-          <div className="flex gap-2">
-            <span className="text-lg">All</span>
-            <span className="text-lg">Active</span>
-            <span className="text-lg">Completed</span>
-          </div>
-          <span className="text-lg">Clear Completed</span>
-        </div>
+        <TodoFooter
+          filteredTodos={filteredTodos}
+          darkMode={darkMode}
+          filter={filter}
+          setFilter={setFilter}
+          handleClearCompleted={() =>
+            handleClearCompleted(todos, setTodos, setLoading)
+          }
+        />
       </div>
     </>
   );
