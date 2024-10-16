@@ -16,7 +16,11 @@ mongoose
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://todo-app-amber-nu.vercel.app"],
+  })
+);
 
 app.use(express.json());
 
