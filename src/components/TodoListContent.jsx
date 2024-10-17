@@ -23,7 +23,7 @@ function TodoListContent({
             />
           ))
         ) : (
-          <p className="text-center text-gray-500 mt-10 text-2xl">
+          <p className="text-center text-gray-500 mt-10 text-2xl select-none">
             {filter === "all"
               ? "Start by adding some Todos!"
               : filter === "active"

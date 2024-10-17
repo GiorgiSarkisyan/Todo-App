@@ -11,7 +11,7 @@ export default function Header() {
       <img
         src={darkMode ? DarkBackground : LightBackground}
         alt="Background"
-        className="object-cover min-h-[274px] w-full max-w-[1600px] mx-auto"
+        className="object-cover min-h-[274px] w-full max-w-[1600px] mx-auto select-none"
       />
     </header>
   );

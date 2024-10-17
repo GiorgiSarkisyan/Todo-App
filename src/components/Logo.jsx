@@ -15,11 +15,13 @@ export default function Logo() {
           size={"40px"}
           color="white"
           onClick={() => setDarkMode((p) => !p)}
+          className="cursor-pointer"
         />
       ) : (
         <HiSun
           size={"40px"}
           color="white"
+          className="cursor-pointer"
           onClick={() => setDarkMode((p) => !p)}
         />
       )}

@@ -37,13 +37,13 @@ export default function Input({ setTodos }) {
           width="36.5px"
           height="18px"
           onClick={() => setIsActive((p) => !p)}
-          className="select-none"
+          className="select-none cursor-pointer"
         />
       ) : (
         <div
           className={`w-9 h-9 border-2 ${
             darkMode ? "bg-[ #25273D] border-[#393A4B]" : "border-[#E3E4F1] "
-          } rounded-full  select-none transition-all duration-300	`}
+          } rounded-full  select-none transition-all duration-300	cursor-pointer`}
           onClick={() => setIsActive((p) => !p)}
         ></div>
       )}

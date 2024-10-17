@@ -17,7 +17,9 @@ const TodoFooter = ({
       <span
         className={`${
           window.innerWidth <= 530 ? "text-base" : "text-lg"
-        } transition-all duration-300 ${darkMode ? "text-[#5B5E7E]" : ""}`}
+        } transition-all duration-300 select-none ${
+          darkMode ? "text-[#5B5E7E]" : ""
+        }`}
       >
         {`${filteredTodos.length > 0 ? filteredTodos.length : 0}`} items left
       </span>
@@ -25,7 +27,7 @@ const TodoFooter = ({
         <button
           className={`${
             window.innerWidth <= 530 ? "text-base" : "text-lg"
-          } transition-all duration-300 ${
+          } transition-all duration-300 cursor-pointer select-none ${
             filter === "all"
               ? "text-[#3A7CFD]"
               : darkMode
@@ -39,7 +41,7 @@ const TodoFooter = ({
         <button
           className={`${
             window.innerWidth <= 530 ? "text-base" : "text-lg"
-          } transition-all duration-300 ${
+          } transition-all duration-300 cursor-pointer select-none ${
             filter === "active"
               ? "text-[#3A7CFD]"
               : darkMode
@@ -53,7 +55,7 @@ const TodoFooter = ({
         <button
           className={`${
             window.innerWidth <= 530 ? "text-base" : "text-lg"
-          } transition-all duration-300 ${
+          } transition-all duration-300 cursor-pointer select-none ${
             filter === "completed"
               ? "text-[#3A7CFD]"
               : darkMode
@@ -68,7 +70,7 @@ const TodoFooter = ({
       <span
         className={`${
           window.innerWidth <= 530 ? "text-base" : "text-lg"
-        } cursor-pointer transition-all duration-300 ${
+        } cursor-pointer transition-all duration-300 select-none ${
           darkMode ? "text-[#5B5E7E] hover:text-[#E3E4F1]" : ""
         }`}
         onClick={handleClearCompleted}

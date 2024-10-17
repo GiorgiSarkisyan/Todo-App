@@ -25,18 +25,18 @@ export default function Todo({ todo, deleteTodo }) {
           width="36.5px"
           height="18px"
           onClick={() => handleCheckboxChange(todo, setLoading, setTodos)}
-          className="select-none"
+          className="select-none cursor-pointer"
         />
       ) : (
         <div
-          className={`w-9 h-9 border-2 ${
+          className={`w-9 h-9 border-2 cursor-pointer ${
             darkMode ? "border-[#393A4B] bg-[#25273D] " : "border-[#E3E4F1]"
           } rounded-full select-none transition-all duration-300`}
           onClick={() => handleCheckboxChange(todo, setLoading, setTodos)}
         ></div>
       )}
       <span
-        className={`font-josefin text-[25px] transition-all duration-300 ${
+        className={`font-josefin text-[25px] transition-all duration-300 select-none ${
           darkMode ? "text-[#C8CBE7]" : "text-[#494C6B]"
         } ${
           active
@@ -46,7 +46,7 @@ export default function Todo({ todo, deleteTodo }) {
       >
         {value}
       </span>
-      <span className="ml-auto opacity-0  transition-opacity duration-300 group-hover:opacity-100">
+      <span className="ml-auto opacity-0  transition-opacity duration-300 group-hover:opacity-100 cursor-pointer">
         <HiX className="w-6 h-6" color="gray" onClick={deleteTodo} />
       </span>
     </div>

@@ -4,7 +4,6 @@ import cors from "cors";
 
 const app = express();
 
-// Hardcoded MongoDB URI - consider moving to environment variables in production
 const MONGODB_URI =
   "mongodb+srv://giorgi:giogio13S@cluster0.8si4fbh.mongodb.net/TodoApp?retryWrites=true&w=majority&appName=Cluster0";
 

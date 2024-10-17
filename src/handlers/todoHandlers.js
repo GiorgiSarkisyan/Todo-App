@@ -5,14 +5,15 @@ import { updateTodo } from "../_mutations/updateTodo";
 export const handleClearCompleted = async (todos, setTodos, setLoading) => {
   setLoading(true);
 
+  console.log(setLoading);
+
   const activeTodos = todos.filter((todo) => todo.active === true);
 
   await Promise.all(
-    activeTodos.map((todo) => deleteTodo(todo._id, setTodos, todos))
+    activeTodos.map((todo) => deleteTodo(todo._id, setTodos, todos, setLoading))
   );
 
   setTodos((prevTodos) => prevTodos.filter((todo) => todo.active === false));
-
   setLoading(false);
 };
 
